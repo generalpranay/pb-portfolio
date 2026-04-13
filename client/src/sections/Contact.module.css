@@ -1,0 +1,336 @@
+.section {
+  background: rgba(8, 8, 8, 0.93);
+  border-top: 1px solid var(--border);
+  padding: 100px 0;
+  position: relative;
+  z-index: 1;
+}
+
+[data-theme='light'] .section {
+  background: rgba(249, 249, 254, 0.93);
+}
+
+.inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+/* Left column */
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.headingAccent {
+  color: var(--accent);
+}
+
+.subtext {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin-bottom: 40px;
+  max-width: 400px;
+}
+
+.contactLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.contactLink {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  transition: background var(--transition), border-color var(--transition);
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.contactLink:hover {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+.linkIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.contactLink:hover .linkIcon {
+  background: rgba(108,92,231,0.12);
+  border-color: var(--border2);
+}
+
+.linkText {
+  flex: 1;
+  min-width: 0;
+}
+
+.linkLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 2px;
+}
+
+.linkValue {
+  font-size: 14px;
+  color: var(--text);
+  position: relative;
+  display: inline-block;
+}
+
+.linkValue::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 100%;
+  height: 1px;
+  background: var(--accent2);
+  transition: right 0.28s ease;
+}
+
+.contactLink:hover .linkValue::after {
+  right: 0;
+}
+
+.linkArrow {
+  color: var(--muted);
+  transition: transform var(--transition), color var(--transition);
+  flex-shrink: 0;
+}
+
+.contactLink:hover .linkArrow {
+  transform: translate(3px, -3px);
+  color: var(--accent);
+}
+
+/* Right column */
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.clockBlock {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+}
+
+.clockLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.clockTime {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.availability {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface2);
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.statusDot.green {
+  background: #28c840;
+  box-shadow: 0 0 0 3px rgba(40, 200, 64, 0.25);
+  animation: pulse 2s infinite;
+}
+
+.statusDot.amber {
+  background: #febc2e;
+  box-shadow: 0 0 0 3px rgba(254, 188, 46, 0.25);
+}
+
+.statusDot.gray {
+  background: #555;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(40,200,64,0.25); }
+  50%       { box-shadow: 0 0 0 6px rgba(40,200,64,0.08); }
+}
+
+.statusText {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Contact form */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.formLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.input,
+.textarea {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  font-size: 14px;
+  color: var(--text);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+  width: 100%;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.12);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--muted);
+  opacity: 0.5;
+}
+
+.submitBtn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  padding: 14px 28px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), transform 0.15s ease, box-shadow var(--transition);
+  align-self: flex-start;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: #7c6cf5;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(108, 92, 231, 0.35);
+}
+
+.submitBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.feedback {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  border: 1px solid;
+}
+
+.feedbackSuccess {
+  background: rgba(40, 200, 64, 0.06);
+  border-color: rgba(40, 200, 64, 0.3);
+  color: #28c840;
+}
+
+.feedbackError {
+  background: rgba(255, 107, 107, 0.06);
+  border-color: rgba(255, 107, 107, 0.3);
+  color: var(--accent3);
+}
+
+@media (max-width: 900px) {
+  .section { padding: 72px 0; }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .heading { font-size: clamp(26px, 5vw, 38px); }
+}
+
+@media (max-width: 480px) {
+  .section { padding: 56px 0; }
+  .clockTime { font-size: 22px; }
+  .clockBlock { padding: 20px; }
+  .submitBtn { align-self: stretch; text-align: center; }
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+}
