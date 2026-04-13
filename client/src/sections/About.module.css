@@ -100,7 +100,13 @@
   overflow: hidden;
   border: 1px solid var(--border2);
   background: #050505;
-  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(108, 92, 231, 0.08);
+  transition: box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.terminal:hover {
+  border-color: rgba(108, 92, 231, 0.3);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.55), 0 0 40px rgba(108, 92, 231, 0.12);
 }
 
 [data-theme='light'] .terminal {

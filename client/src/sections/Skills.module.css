@@ -40,11 +40,32 @@
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  transition: border-color var(--transition);
+  transition: border-color 0.28s ease, box-shadow 0.28s ease, transform 0.22s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.group::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
 }
 
 .group:hover {
   border-color: var(--border2);
+  box-shadow: 0 12px 36px rgba(108, 92, 231, 0.1);
+  transform: translateY(-2px);
+}
+
+.group:hover::before {
+  transform: scaleX(1);
 }
 
 .groupTitle {
@@ -95,10 +116,12 @@
   border-radius: 3px;
   background: linear-gradient(90deg, var(--accent), var(--accent2));
   transition: width 1.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
 }
 
 .bar.animate {
   width: var(--w);
+  box-shadow: 0 0 8px rgba(108, 92, 231, 0.4);
 }
 
 /* Tag cloud */
@@ -130,13 +153,30 @@
   border-radius: 100px;
   padding: 6px 14px;
   cursor: default;
-  transition: border-color var(--transition), color var(--transition), background var(--transition);
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tag::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 100px;
+  background: linear-gradient(90deg, transparent, rgba(108, 92, 231, 0.12), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
 }
 
 .tag:hover {
   border-color: var(--accent);
   color: var(--accent);
   background: rgba(108, 92, 231, 0.06);
+  box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.1);
+}
+
+.tag:hover::before {
+  transform: translateX(100%);
 }
 
 @media (max-width: 900px) {

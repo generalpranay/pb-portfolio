@@ -50,14 +50,33 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  transition: border-color var(--transition), transform 0.2s ease, box-shadow var(--transition);
+  transition: border-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
   text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
 }
 
 .card:hover {
   border-color: var(--border2);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 44px rgba(108, 92, 231, 0.14), 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.card:hover::after {
+  transform: scaleX(1);
 }
 
 .cardHeader {

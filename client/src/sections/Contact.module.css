@@ -272,7 +272,7 @@
 }
 
 .submitBtn {
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent), #7c6cf5);
   color: #fff;
   border: none;
   border-radius: 100px;
@@ -281,14 +281,31 @@
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: background var(--transition), transform 0.15s ease, box-shadow var(--transition);
+  transition: transform 0.18s ease, box-shadow 0.25s ease, filter 0.25s ease;
   align-self: flex-start;
+  box-shadow: 0 4px 20px rgba(108, 92, 231, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.submitBtn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 100px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent);
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
 
 .submitBtn:hover:not(:disabled) {
-  background: #7c6cf5;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(108, 92, 231, 0.35);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(108, 92, 231, 0.45);
+  filter: brightness(1.08);
+}
+
+.submitBtn:hover:not(:disabled)::after {
+  opacity: 1;
 }
 
 .submitBtn:disabled {

@@ -12,9 +12,24 @@ export default function ParticleCanvas() {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let animId;
-    // Track via window so mouse coords work through all sections
     let mouse = { x: -9999, y: -9999 };
     let dots = [];
+
+    // Theme-aware colors (updated via MutationObserver)
+    const colors = { dot: '108,92,231', line: '108,92,231' };
+
+    const syncColors = () => {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      colors.dot = isLight ? '0,169,142' : '108,92,231';
+      colors.line = isLight ? '0,169,142' : '108,92,231';
+    };
+    syncColors();
+
+    const observer = new MutationObserver(syncColors);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
 
     const buildDots = () => {
       dots = [];
@@ -67,11 +82,11 @@ export default function ParticleCanvas() {
           if (Math.abs(dy) > CONNECT) continue;
           const dist = Math.hypot(dx, dy);
           if (dist < CONNECT) {
-            const alpha = (1 - dist / CONNECT) * 0.2;
+            const alpha = (1 - dist / CONNECT) * 0.22;
             ctx.beginPath();
             ctx.moveTo(dots[i].x, dots[i].y);
             ctx.lineTo(dots[j].x, dots[j].y);
-            ctx.strokeStyle = `rgba(108,92,231,${alpha})`;
+            ctx.strokeStyle = `rgba(${colors.line},${alpha})`;
             ctx.lineWidth = 0.6;
             ctx.stroke();
           }
@@ -83,14 +98,13 @@ export default function ParticleCanvas() {
         const pulse = 0.25 + 0.35 * (0.5 + 0.5 * Math.sin(t * 1.2 + d.phase));
         ctx.beginPath();
         ctx.arc(d.x, d.y, 1.5, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(108,92,231,${pulse})`;
+        ctx.fillStyle = `rgba(${colors.dot},${pulse})`;
         ctx.fill();
       }
 
       animId = requestAnimationFrame(draw);
     };
 
-    // Listen on window so mouse coords are captured regardless of which section is hovered
     const onMouseMove = (e) => {
       mouse = { x: e.clientX, y: e.clientY };
     };
@@ -107,6 +121,7 @@ export default function ParticleCanvas() {
 
     return () => {
       cancelAnimationFrame(animId);
+      observer.disconnect();
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', onMouseMove);
       document.documentElement.removeEventListener('mouseleave', onMouseLeave);

@@ -2,6 +2,8 @@ import { Routes, Route } from 'react-router-dom';
 import Nav from './components/Nav.jsx';
 import Footer from './components/Footer.jsx';
 import ParticleCanvas from './components/ParticleCanvas.jsx';
+import ScrollProgress from './components/ScrollProgress.jsx';
+import CursorGlow from './components/CursorGlow.jsx';
 import Hero from './sections/Hero.jsx';
 import About from './sections/About.jsx';
 import Projects from './sections/Projects.jsx';
@@ -27,6 +29,8 @@ function Home() {
 export default function App() {
   return (
     <>
+      <ScrollProgress />
+      <CursorGlow />
       <ParticleCanvas />
       <Nav />
       <Routes>

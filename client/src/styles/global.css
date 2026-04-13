@@ -151,3 +151,29 @@ input, textarea {
   background: var(--accent);
   color: #fff;
 }
+
+/* ─── FLOW ANIMATIONS ─── */
+@keyframes progressShimmer {
+  0%   { background-position: 0% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes gradientFlow {
+  0%   { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.08); }
+}
+
+/* Gradient text utility */
+.gradientText {
+  background: linear-gradient(110deg, var(--text) 20%, var(--accent2) 50%, var(--accent) 70%, var(--text) 90%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientFlow 8s ease-in-out infinite;
+}
