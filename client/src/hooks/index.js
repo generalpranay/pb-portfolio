@@ -118,7 +118,7 @@ export function useActiveSection(sectionIds) {
       if (!el) return null;
       const obs = new IntersectionObserver(
         ([entry]) => { if (entry.isIntersecting) setActive(id); },
-        { threshold: 0.35, rootMargin: '-80px 0px -20% 0px' }
+        { threshold: 0.15, rootMargin: '-80px 0px 0px 0px' }
       );
       obs.observe(el);
       return obs;
