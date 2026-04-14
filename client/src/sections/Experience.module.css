@@ -1,28 +1,45 @@
 .section {
-  background: rgba(6, 6, 6, 0.94);
+  background: rgba(6, 6, 6, 0.96);
   border-top: 1px solid var(--border);
-  padding: 100px 0;
+  padding: 110px 0;
   position: relative;
   z-index: 1;
+  overflow: hidden;
+}
+
+/* Ambient glow */
+.section::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: -20%;
+  width: 55%;
+  height: 70%;
+  background: radial-gradient(ellipse, rgba(0, 203, 169, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 [data-theme='light'] .section {
-  background: rgba(252, 252, 255, 0.95);
+  background: rgba(252, 252, 255, 0.97);
 }
 
 .inner {
   max-width: var(--max-w);
   margin: 0 auto;
   padding: 0 24px;
+  position: relative;
+  z-index: 1;
 }
 
 .heading {
   font-family: var(--font-display);
-  font-size: clamp(28px, 4vw, 42px);
+  font-size: clamp(30px, 4.5vw, 48px);
   font-weight: 800;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
   color: var(--text);
-  margin-bottom: 56px;
+  margin-bottom: 60px;
+  line-height: 1;
 }
 
 .timeline {
@@ -38,17 +55,18 @@
 }
 
 .dateCol {
-  padding: 2px 24px 0 0;
+  padding: 4px 24px 0 0;
   text-align: right;
 }
 
 .date {
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.06em;
+  font-size: 10px;
+  letter-spacing: 0.08em;
   color: var(--muted);
   line-height: 1.4;
   white-space: nowrap;
+  opacity: 0.7;
 }
 
 .connectorCol {
@@ -61,7 +79,7 @@
 .connectorLine {
   width: 1px;
   flex: 1;
-  background: linear-gradient(to bottom, rgba(108, 92, 231, 0.5), var(--border));
+  background: linear-gradient(to bottom, var(--accent), rgba(108, 92, 231, 0.1));
   min-height: 100%;
   position: absolute;
   top: 0;
@@ -71,30 +89,38 @@
 }
 
 .dot {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: var(--accent);
   border: 2px solid var(--bg);
-  box-shadow: 0 0 0 1px var(--accent), 0 0 12px rgba(108, 92, 231, 0.5);
+  box-shadow: 0 0 0 1px var(--accent), 0 0 16px rgba(108, 92, 231, 0.6);
   position: relative;
   z-index: 1;
-  margin-top: 4px;
+  margin-top: 6px;
   flex-shrink: 0;
-  animation: dotPulse 3s ease-in-out infinite;
+  animation: dotPulse 3.5s ease-in-out infinite;
 }
 
 .dotEdu {
   background: var(--accent2);
-  box-shadow: 0 0 0 1px var(--accent2), 0 0 12px rgba(0, 203, 169, 0.5);
-  animation-delay: 1.5s;
+  border-color: var(--bg);
+  box-shadow: 0 0 0 1px var(--accent2), 0 0 16px rgba(0, 203, 169, 0.6);
+  animation: dotPulseEdu 3.5s ease-in-out infinite;
+  animation-delay: 1.8s;
 }
 
 @keyframes dotPulse {
-  0%, 100% { box-shadow: 0 0 0 1px var(--accent), 0 0 8px rgba(108, 92, 231, 0.4); }
-  50%       { box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2), 0 0 20px rgba(108, 92, 231, 0.6); }
+  0%, 100% { box-shadow: 0 0 0 1px var(--accent), 0 0 10px rgba(108, 92, 231, 0.5); }
+  50%       { box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.15), 0 0 24px rgba(108, 92, 231, 0.7); }
 }
 
+@keyframes dotPulseEdu {
+  0%, 100% { box-shadow: 0 0 0 1px var(--accent2), 0 0 10px rgba(0, 203, 169, 0.5); }
+  50%       { box-shadow: 0 0 0 4px rgba(0, 203, 169, 0.15), 0 0 24px rgba(0, 203, 169, 0.7); }
+}
+
+/* Content card */
 .contentCol {
   padding: 0 0 52px 24px;
 }
@@ -107,23 +133,59 @@
   display: none;
 }
 
+.contentCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.28s ease, box-shadow 0.28s ease, transform 0.22s var(--spring) !important;
+}
+
+.contentCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s ease !important;
+  opacity: 0.7;
+}
+
+.contentCard:hover {
+  border-color: var(--border2);
+  box-shadow: 0 12px 40px rgba(108, 92, 231, 0.12), 0 2px 8px rgba(0, 0, 0, 0.4);
+  transform: translateX(4px);
+}
+
+.contentCard:hover::before {
+  transform: scaleX(1);
+}
+
 .dateMobile {
   display: none;
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
+  font-size: 9px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  opacity: 0.7;
 }
 
 .role {
   font-family: var(--font-display);
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--text);
   letter-spacing: -0.02em;
   margin-bottom: 2px;
+  line-height: 1.3;
 }
 
 .company {
@@ -135,16 +197,22 @@
 
 .type {
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.08em;
+  font-size: 9px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 2px 8px;
+  background: rgba(108, 92, 231, 0.06);
+  border: 1px solid rgba(108, 92, 231, 0.18);
+  border-radius: 100px;
+  padding: 3px 10px;
   display: inline-block;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+}
+
+.isEdu .type {
+  color: var(--accent2);
+  background: rgba(0, 203, 169, 0.06);
+  border-color: rgba(0, 203, 169, 0.2);
 }
 
 .bullets {
@@ -155,10 +223,10 @@
 }
 
 .bullets li {
-  font-size: 14px;
-  line-height: 1.65;
+  font-size: 13px;
+  line-height: 1.68;
   color: var(--muted);
-  padding-left: 18px;
+  padding-left: 20px;
   position: relative;
 }
 
@@ -168,12 +236,13 @@
   left: 0;
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
+  top: 3px;
 }
 
 @media (max-width: 900px) {
-  .section { padding: 72px 0; }
-  .heading { margin-bottom: 36px; }
+  .section { padding: 80px 0; }
+  .heading { margin-bottom: 44px; }
   .item { grid-template-columns: 120px 24px 1fr; }
 }
 
@@ -182,10 +251,11 @@
   .dateCol { display: none; }
   .dateMobile { display: block; }
   .contentCol { padding: 0 0 40px 16px; }
-  .role { font-size: 15px; }
-  .bullets li { font-size: 13px; }
+  .role { font-size: 14px; }
+  .bullets li { font-size: 12px; }
+  .contentCard { padding: 18px; }
 }
 
 @media (max-width: 480px) {
-  .section { padding: 56px 0; }
+  .section { padding: 60px 0; }
 }

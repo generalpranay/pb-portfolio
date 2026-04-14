@@ -21,15 +21,15 @@ function GitHubIcon() {
 const nameVariants = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.06, delayChildren: 0.2 },
+    transition: { staggerChildren: 0.055, delayChildren: 0.1 },
   },
 };
 
 const letterVariants = {
-  hidden: { y: 48, opacity: 0, skewX: 8 },
+  hidden: { y: 64, opacity: 0, skewX: 10 },
   visible: {
     y: 0, opacity: 1, skewX: 0,
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
@@ -37,7 +37,7 @@ export default function Hero() {
   const [tagIndex, setTagIndex] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(() => setTagIndex(i => (i + 1) % TAGLINES.length), 2600);
+    const id = setInterval(() => setTagIndex(i => (i + 1) % TAGLINES.length), 2800);
     return () => clearInterval(id);
   }, []);
 
@@ -50,16 +50,19 @@ export default function Hero() {
 
   return (
     <section className={styles.section}>
+      <div className={styles.gridBg} aria-hidden="true" />
+
       <div className={styles.content}>
+        {/* Available badge */}
+        <div className={styles.badge}>
+          <span className={styles.badgeDot} />
+          Open to Work — Calgary, AB
+        </div>
+
         {/* Eyebrow */}
-        <motion.p
-          className={styles.eyebrow}
-          initial={{ opacity: 0, x: -16 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.05 }}
-        >
-          Software Developer · Calgary, AB
-        </motion.p>
+        <p className={styles.eyebrow}>
+          Software Developer
+        </p>
 
         {/* Name */}
         <div className={styles.nameWrap}>
@@ -99,10 +102,10 @@ export default function Hero() {
             <motion.span
               key={tagIndex}
               className={styles.tagline}
-              initial={{ opacity: 0, y: 14, filter: 'blur(8px)' }}
+              initial={{ opacity: 0, y: 16, filter: 'blur(10px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, y: -14, filter: 'blur(8px)' }}
-              transition={{ duration: 0.42 }}
+              exit={{ opacity: 0, y: -16, filter: 'blur(10px)' }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             >
               {TAGLINES[tagIndex]}
             </motion.span>
@@ -112,9 +115,9 @@ export default function Hero() {
         {/* CTA buttons */}
         <motion.div
           className={styles.cta}
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.65 }}
+          transition={{ duration: 0.6, delay: 0.7 }}
         >
           <button className={styles.ctaFilled} onClick={() => scrollTo('projects')}>
             View my work
@@ -138,7 +141,7 @@ export default function Hero() {
           className={styles.stats}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.85 }}
+          transition={{ duration: 0.6, delay: 0.9 }}
         >
           {[
             { num: '4+', label: 'Projects shipped' },

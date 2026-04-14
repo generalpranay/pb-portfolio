@@ -11,6 +11,21 @@ function ArrowIcon() {
   );
 }
 
+function SkeletonCard() {
+  return (
+    <div className={styles.skeletonCard}>
+      <div className={styles.skLine} style={{ width: '40%', height: '9px' }} />
+      <div className={styles.skLine} style={{ width: '70%', height: '20px', marginTop: 6 }} />
+      <div className={styles.skLine} style={{ width: '45%', height: '11px' }} />
+      <div className={styles.skLine} style={{ width: '95%' }} />
+      <div className={styles.skLine} style={{ width: '85%' }} />
+      <div className={styles.skLine} style={{ width: '75%' }} />
+      <div className={styles.skLine} style={{ width: '60%', marginTop: 8 }} />
+      <div className={styles.skLine} style={{ width: '80%' }} />
+    </div>
+  );
+}
+
 function ProjectCard({ project, index }) {
   const [hovered, setHovered] = useState(false);
 
@@ -19,11 +34,14 @@ function ProjectCard({ project, index }) {
       className={`${styles.card} ${hovered ? styles.cardHovered : ''}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      initial={{ opacity: 0, y: 32 }}
+      initial={{ opacity: 0, y: 36 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
+      viewport={{ once: true, amount: 0.08 }}
       transition={{ duration: 0.65, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
     >
+      {/* Decorative project number */}
+      <span className={styles.cardNumber} aria-hidden="true">{project.number}</span>
+
       <div className={styles.cardGlow} />
 
       <div className={styles.cardTop}>
@@ -55,11 +73,6 @@ function ProjectCard({ project, index }) {
   );
 }
 
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
-};
-
 export default function Projects() {
   const { data: projects, loading, error } = useProjects();
   const { ref, inView } = useReveal();
@@ -70,37 +83,38 @@ export default function Projects() {
         <div className={styles.header} ref={ref}>
           <motion.p
             className="sectionLabel"
-            initial={{ opacity: 0, x: -12 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: -8 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
           >
             Work
           </motion.p>
           <motion.h2
             className={styles.heading}
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.6, delay: 0.08 }}
           >
             Featured Projects
           </motion.h2>
         </div>
 
-        {loading && <div className={styles.loading}>Loading projects...</div>}
+        {loading && (
+          <div className={styles.skeletonGrid}>
+            {Array.from({ length: 4 }).map((_, i) => (
+              <SkeletonCard key={i} />
+            ))}
+          </div>
+        )}
+
         {error && <div className={styles.error}>Failed to load projects</div>}
 
         {projects && (
-          <motion.div
-            className={styles.grid}
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.05 }}
-          >
+          <div className={styles.grid}>
             {projects.map((project, i) => (
               <ProjectCard key={project.id} project={project} index={i} />
             ))}
-          </motion.div>
+          </div>
         )}
       </div>
     </section>

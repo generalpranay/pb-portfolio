@@ -100,15 +100,17 @@ export default function Experience() {
               </div>
 
               <div className={styles.contentCol}>
-                <span className={styles.dateMobile}>{item.date}</span>
-                <h3 className={styles.role}>{item.role}</h3>
-                <p className={styles.company}>{item.company}</p>
-                <span className={styles.type}>{item.type}</span>
-                <ul className={styles.bullets}>
-                  {item.bullets.map((b, j) => (
-                    <li key={j}>{b}</li>
-                  ))}
-                </ul>
+                <div className={`${styles.contentCard} ${item.isEdu ? styles.isEdu : ''}`}>
+                  <span className={styles.dateMobile}>{item.date}</span>
+                  <h3 className={styles.role}>{item.role}</h3>
+                  <p className={styles.company}>{item.company}</p>
+                  <span className={styles.type}>{item.type}</span>
+                  <ul className={styles.bullets}>
+                    {item.bullets.map((b, j) => (
+                      <li key={j}>{b}</li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </motion.div>
           ))}

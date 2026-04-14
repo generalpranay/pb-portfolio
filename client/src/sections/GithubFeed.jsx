@@ -77,12 +77,23 @@ export default function GithubFeed() {
       <div className={styles.inner}>
         <motion.div
           ref={ref}
+          className={styles.sectionHeader}
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <p className="sectionLabel">Open Source</p>
-          <h2 className={styles.heading}>GitHub Activity</h2>
+          <div className={styles.headingGroup}>
+            <p className="sectionLabel">Open Source</p>
+            <h2 className={styles.heading}>GitHub Activity</h2>
+          </div>
+          <a
+            href="https://github.com/generalpranay"
+            target="_blank"
+            rel="noreferrer"
+            className={styles.viewAll}
+          >
+            View all repos →
+          </a>
         </motion.div>
 
         {loading && (

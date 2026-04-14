@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:pb-portfolio-production.up.railway.app)"
+      "WebFetch(domain:pb-portfolio-production.up.railway.app)",
+      "Bash(npm run:*)"
     ]
   }
 }

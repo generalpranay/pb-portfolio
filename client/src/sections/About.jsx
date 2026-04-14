@@ -106,16 +106,9 @@ export default function About() {
               Development diploma in November 2025.
             </p>
 
-            <div className={styles.stats}>
-              {[
-                { num: '4+', label: 'Projects shipped' },
-                { num: '3+', label: 'Industries served' },
-                { num: '100%', label: 'Data consistency' },
-              ].map(({ num, label }) => (
-                <div key={label} className={styles.stat}>
-                  <span className={styles.statNum}>{num}</span>
-                  <span className={styles.statLabel}>{label}</span>
-                </div>
+            <div className={styles.chips}>
+              {['System Design', 'REST API Architecture', 'Enterprise Integration', 'Full SDLC', 'Cloud Deployment'].map(skill => (
+                <span key={skill} className={styles.chip}>{skill}</span>
               ))}
             </div>
           </div>

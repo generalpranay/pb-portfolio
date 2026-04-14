@@ -45,7 +45,7 @@ const SKILL_GROUPS = [
 const TAGS = [
   'Agile / Scrum', 'SDLC', 'System Architecture', 'JUnit', 'Postman',
   'OpenAPI / Swagger', 'JSON / XML', 'C#', 'Git / GitHub', 'Firebase',
-  'Azure AI Services', 'MuleSoft', 'Frontend Design', 'UI/UX Pro Max',
+  'Azure AI Services', 'MuleSoft', 'Frontend Design', 'REST Architecture',
 ];
 
 function SkillGroup({ group, animate }) {

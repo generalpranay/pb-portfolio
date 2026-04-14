@@ -1,13 +1,13 @@
 .footer {
-  background: rgba(5, 5, 5, 0.96);
+  background: rgba(5, 5, 5, 0.98);
   border-top: 1px solid var(--border);
-  padding: 36px 24px;
+  padding: 32px 24px;
   position: relative;
   z-index: 1;
 }
 
 [data-theme='light'] .footer {
-  background: rgba(238, 238, 248, 0.97);
+  background: rgba(238, 238, 248, 0.98);
 }
 
 .inner {
@@ -22,40 +22,54 @@
 
 .copy {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
   color: var(--muted);
+  opacity: 0.6;
 }
 
 .links {
   display: flex;
-  gap: 24px;
+  gap: 28px;
 }
 
 .links a {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
   color: var(--muted);
-  transition: color var(--transition);
+  transition: color 0.22s ease !important;
+  letter-spacing: 0.05em;
 }
 
 .links a:hover {
   color: var(--accent2);
 }
 
-.built {
+.backTop {
   font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--surface2);
+  font-size: 14px;
   color: var(--muted);
-  opacity: 0.5;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.22s ease, color 0.22s ease, transform 0.2s var(--spring), background 0.22s ease !important;
+}
+
+.backTop:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(108, 92, 231, 0.08);
+  transform: translateY(-3px);
 }
 
 @media (max-width: 600px) {
   .inner {
     flex-direction: column;
+    align-items: center;
     text-align: center;
-  }
-  .built {
-    display: none;
   }
 }

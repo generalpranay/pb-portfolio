@@ -58,37 +58,37 @@
 
 .link {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px 0;
+  padding: 6px 12px;
+  border-radius: 100px;
   position: relative;
-  transition: color var(--transition);
+  transition: color 0.22s ease, background 0.22s ease !important;
 }
 
-.link::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  right: 100%;
-  height: 1px;
-  background: var(--accent2);
-  transition: right 0.28s ease;
+.link:hover {
+  color: var(--text);
+  background: rgba(255,255,255,0.05);
 }
 
-.link:hover,
 .link.active {
   color: var(--accent2);
+  background: rgba(0, 203, 169, 0.1);
+  border: 1px solid rgba(0, 203, 169, 0.18);
 }
 
-.link.active::after,
-.link:hover::after {
-  right: 0;
+[data-theme='light'] .link:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='light'] .link.active {
+  background: rgba(0, 169, 142, 0.08);
+  border-color: rgba(0, 169, 142, 0.22);
 }
 
 .actions {
