@@ -3,9 +3,7 @@ import { motion } from 'framer-motion';
 import { useCalgaryTime, useReveal } from '../hooks/index.js';
 import styles from './Contact.module.css';
 
-const API_BASE = import.meta.env.VITE_API_URL
-  ? `${import.meta.env.VITE_API_URL}/api`
-  : '/api';
+const API_BASE = '/api';
 
 function ArrowIcon() {
   return (

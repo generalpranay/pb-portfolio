@@ -1,10 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 
 // In dev, Vite proxies /api/* to localhost:4000.
-// In production (Vercel), VITE_API_URL points to the Render backend.
-const API_BASE = import.meta.env.VITE_API_URL
-  ? `${import.meta.env.VITE_API_URL}/api`
-  : '/api';
+// In production, Vercel serverless functions handle /api/* on the same domain.
+const API_BASE = '/api';
 
 /* ─── useFetch ─── */
 export function useFetch(url) {
